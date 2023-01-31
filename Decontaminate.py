@@ -16,6 +16,7 @@ def Decontaminate_Rows(df_list):
         df_list[n].dropna(subset=['State_MCL'], how='all', inplace=True)
         df_list[n] = df_list[n].loc[df_list[n].State_MCL != 'MCL']
         df_list[n] = df_list[n].loc[df_list[n].State_MCL != 'mrem/yr']
+        df_list[n]['Units'] = 'mg/L'
     return df_list
 
 
