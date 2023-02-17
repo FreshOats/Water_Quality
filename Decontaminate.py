@@ -77,7 +77,6 @@ def Decontaminate_Values(df_list):
             # Changes long text to just chromium, total - changes 'witdrawn' to Null
             df_list[n].loc[12, ["Contaminant", "State_PHG"]] = ['Chromium, Total', np.nan]
         elif n == 1:
-            df_list[n].loc[0, ["Contaminant"]] = ['Chromium, Hexavalent']
             df_list[n].loc[3, ["Contaminant", "PHG_Date"]] = ['Mercury', 2005]
             df_list[n].loc[5, ["Contaminant", "State_MCL", "State_PHG", "Units"]] = [
                 'Nitrate', 10, 45, '10 as N mg/L']
