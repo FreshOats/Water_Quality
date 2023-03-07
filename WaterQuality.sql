@@ -144,7 +144,7 @@ FROM dbo.stations
 -- DROP TABLE dbo.state_regulations
 CREATE TABLE state_regulations (
 	contaminant VARCHAR(250) NOT NULL, 
-	state_max_level FLOAT, 
+	state_max_level FLOAT NOT NULL, 
 	state_detection_limit FLOAT, 
 	state_health_goal FLOAT, 
 	state_health_date INT, 

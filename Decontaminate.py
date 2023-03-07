@@ -180,6 +180,79 @@ def Decontaminate_Datatypes(df):
     return df 
 
 
+# Adjust the names to match the naming conventions on the measured data
+def Decontaminate_Names(df):
+    df.loc[0, ['Contaminant']] = ['Dissolved Aluminum']
+    df.loc[1, ['Contaminant']] = ['Dissolved Antimony']
+    df.loc[2, ['Contaminant']] = ['Dissolved Arsenic']
+    df.loc[3, ['Contaminant']] = ['Asbestos, Chrysotile']
+    df.loc[4, ['Contaminant']] = ['Dissolved Barium']
+    df.loc[5, ['Contaminant']] = ['Dissolved Beryllium']
+    df.loc[6, ['Contaminant']] = ['Dissolved Cadmium']
+    df.loc[7, ['Contaminant']] = ['Total Chromium']
+    df.loc[8, ['Contaminant']] = ['Cyanide']
+    df.loc[9, ['Contaminant']] = ['Dissolved Fluoride']
+    df.loc[10, ['Contaminant']] = ['Dissolved Mercury']
+    df.loc[11, ['Contaminant']] = ['Dissolved Nickel']
+    df.loc[12, ['Contaminant']] = ['Dissolved Nitrate']
+    df.loc[13, ['Contaminant']] = ['Dissolved Nitrite']
+    df.loc[14, ['Contaminant']] = ['Dissolved Nitrate + Nitrite']
+    df.loc[16, ['Contaminant']] = ['Dissolved Selenium']
+    df.loc[17, ['Contaminant']] = ['Dissolved Thallium']
+    df.loc[18, ['Contaminant']] = ['Dissolved Copper']
+    df.loc[19, ['Contaminant']] = ['Dissolved Lead']
+    df.loc[23, ['Contaminant']] = ['Dissolved Strontium']
+    df.loc[25, ['Contaminant']] = ['Dissolved Uranium']
+    df.loc[27, ['Contaminant']] = ['Carbon tetrachloride']
+    df.loc[28, ['Contaminant']] = ['1,2-Dichlorobenzene']
+    df.loc[29, ['Contaminant']] = ['1,4-Dichlorobenzene']
+    df.loc[30, ['Contaminant']] = ['1,1-Dichloroethane']
+    df.loc[31, ['Contaminant']] = ['1,2-Dichloroethane']
+    # Note that Dichloroethylene and Dichloroethene are the same chemical compound
+    df.loc[32, ['Contaminant']] = ['1,1-Dichloroethene']
+    df.loc[33, ['Contaminant']] = ['cis-1,2-Dichloroethene']
+    df.loc[34, ['Contaminant']] = ['trans-1,2-Dichloroethene']
+    # This was listed as Dichloromethane(Metheylene Chloride), the labs use the latter
+    df.loc[35, ['Contaminant']] = ['Methylene chloride']
+    df.loc[36, ['Contaminant']] = ['1,2-Dichloropropane']
+    # There is an issue here where the labs collected cis and trans separately, but the state only regulates the mixture
+    df.loc[37, ['Contaminant']] = ['cis-1,3-Dichloropropene']
+    # tert is an abbreviation for tertiary
+    df.loc[39, ['Contaminant']] = ['Methyl tert-butyl ether (MTBE)']
+    # Chlorobenzene is a specific and simplest of the monochlorobenzenes
+    df.loc[40, ['Contaminant']] = ['Chlorobenzene']
+    # There is a problem with the lab data here; they have both tetrachloroethylene and tetrachloroethene, which are the same thing
+    df.loc[43, ['Contaminant']] = ['Tetrachloroethene']
+    df.loc[46, ['Contaminant']] = ['1,1,1-Trichloroethane']
+    df.loc[47, ['Contaminant']] = ['1,1,2-Trichloroethane']
+    df.loc[48, ['Contaminant']] = ['Trichloroethene']
+    df.loc[49, ['Contaminant']] = ['Trichlorofluoromethane']
+    df.loc[50, ['Contaminant']] = ['1,1,2-Trichlorotrifluoroethane']
+    df.loc[52, ['Contaminant']] = ['Total Xylene, (total)']
+    df.loc[60, ['Contaminant']] = ['1,2-Dibromo-3-chloropropane (DBCP)']
+    df.loc[61, ['Contaminant']] = ['2,4-D']
+    # this is the same compound as Di(2-ethylhexyl)adipate
+    df.loc[62, ['Contaminant']] = ['Bis(2-ethylhexyl) adipate']
+    # This is the same compound as Di(2-ethylhexyl)phthalate
+    df.loc[63, ['Contaminant']] = ['bis(2-Ethylhexyl) phthalate']
+    df.loc[64, ['Contaminant']] = ['Dinoseb (DNPB)']
+    df.loc[68, ['Contaminant']] = ['Ethylene Dibromide']
+    df.loc[74, ['Contaminant']] = ['BHC-gamma (Lindane)']
+    df.loc[78, ['Contaminant']] = ['Pentachlorophenol (PCP)']
+    df.loc[79, ['Contaminant']] = ["PCB's"]
+    df.loc[84, ['Contaminant']] = ['1,2,3-Trichloropropane']
+    df.loc[85, ['Contaminant']] = ['2,3,7,8-Tetrachlorodibenzo-p-dioxin']
+    df.loc[86, ['Contaminant']] = ['2,4,5-TP (Silvex)']
+    return df
+
+
+
+
+
+
+
+
+
 #####################################################
 ################### Main Function ###################
 def Decontaminate(filename):
@@ -195,4 +268,5 @@ def Decontaminate(filename):
     Decontaminate_Values(df_list)
     df = pd.concat(df_list, ignore_index=True)
     Decontaminate_Datatypes(df)
+    Decontaminate_Names(df)
     return df
