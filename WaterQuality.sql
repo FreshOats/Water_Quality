@@ -166,3 +166,14 @@ GO
 SELECT *
 FROM dbo.state_regulations
 ;
+
+-- This will create the subset of lab results that contains only the contaminants found on the regulatory table
+SELECT * INTO regulated_contaminants
+FROM
+    (SELECT s.Contaminant,
+            s.State_MCL AS State_Max,
+            s.Federal_MCL AS Federal_Max,
+            s.Units AS Reg_Units,
+            l.*
+     FROM state_regulations s
+     INNER JOIN lab_results l ON l.parameter = s.Contaminant) AS regulated_contaminants;
