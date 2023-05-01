@@ -12,6 +12,8 @@
 ## Decontaminate_Lists - fixes the dfs where the columns were incorrectly shifted
 ## Decontaminate_Values - fixes the erroneous formats and values within each df
 ## Decontaminate_Datatypes - changes datatypes from string to numeric where appropriate
+## Decontaminate_Unit_Conversions - adjusts units in most from mg/L to ug/L 
+## Decontaminate_Names - changes the names to meet the collected lab data
 
 #####################################################
 ################### Subroutines #####################
@@ -69,19 +71,15 @@ def Decontaminate_Lists(df_list):
     return df_list
 
 
-##################
-# Before changing the individual row values, I need to multiply the State_MCL, State_DLR, State_PGH, Federal_MCL, and Federal_MCLG by 1000 using
-# df['Quantity'] = df['Quantity'].apply(lambda x: x*1000)
 
-# Then I have to go back and convert the values that are incorrect with the following function
-# The values that should definitely be only mg/L: Cyanide, Dissolved Fluoride
+
 
 
 ##################
 
 
 
-# Fix the individual dfs based on the issuers with inputs, missing values, and strings in numerical entries
+# Fix the individual dfs based on the issuers with inputs, missing values, and strings in numerical entries, adjust for units - most will be converted numerically downstream
 def Decontaminate_Values(df_list):
     import numpy as np
     for n in range(len(df_list)):
@@ -89,37 +87,46 @@ def Decontaminate_Values(df_list):
             # Fixes the string zero to numerical
             df_list[n].loc[4, ["Federal_MCLG"]] = [0]
             df_list[n].loc[5, ["Contaminant", "State_MCL", "State_DLR", "State_PHG", "PHG_Date", "Federal_MCL", "Federal_MCLG", "Units"]] = [
-                'Asbestos', 7.0, 0.2, 7.0, 2003, 7.0, 7.0, 'MFL']  # Removes the units from every value to numerical values
-            # Changes long text to just chromium, total - changes 'witdrawn' to Null
-            df_list[n].loc[12, ["Contaminant", "State_PHG"]] = ['Chromium, Total', np.nan]
+                'Asbestos', .007, .0002, .007, 2003, .007, .007, 'MFL']  # Removes the units from every value to numerical values
+            # Changes long text to just chromium, total - changes 'withdrawn' to Null
+            df_list[n].loc[12, ["Contaminant", "State_PHG"]] = [
+                'Chromium, Total', np.nan]
         elif n == 1:
-            df_list[n].loc[3, ["Contaminant", "State_MCL", "State_DLR", "State_PHG", "PHG_Date", "Federal_MCL", "Federal_MCLG", 'Units']] = ['Mercury', 2, 1, 1.2, 2005, 2, 2, 'ug/L']
+            df_list[n].loc[1, ["State_MCL", "State_DLR", "State_PHG", "Federal_MCL", "Federal_MCLG",
+                               "Units"]] = [.00015, 0.0001, 0.00015, 0.0002, 0.0002, 'mg/L']  # Cyanide
+            df_list[n].loc[2, ["State_MCL", "State_DLR", "State_PHG", "Federal_MCL", "Federal_MCLG", "Units"]] = [
+                0.002, 0.0001, 0.001, 0.004, 0.004, 'mg/L']  # Fluoride
+            df_list[n].loc[3, ["Contaminant", "PHG_Date"]] = ['Mercury', 2005]
             df_list[n].loc[5, ["Contaminant", "State_MCL", "State_PHG", "Units"]] = [
-                'Nitrate', 1, 4.5, 'mg/L as N']
+                'Nitrate', .0010, .0045, '10 as N mg/L']
             df_list[n].loc[6, ["Contaminant", "State_MCL", "State_PHG", "Units"]] = [
-                'Nitrite', 1, 1, 'mg/L as N']
+                'Nitrite', .001, .001, '1 as N mg/L']
             df_list[n].loc[7, ["Contaminant", "State_MCL", "State_PHG", "Units"]] = [
-                'Nitrate + Nitrite', 1, 1, 'mg/L as N']
+                'Nitrate + Nitrite', .0010, .0010, '10 as N mg/L']
             df_list[n].loc[10, ["PHG_Date"]] = [2004]
         elif n == 2:
             df_list[n].loc[3, ["Federal_MCLG"]] = [0.0]
         elif n == 3:
-            df_list[n].loc[2, ["Contaminant", "State_PHG", "PHG_Date", "Federal_MCLG", "Units"]] = [
-                "Gross Alpha Particle", np.nan, np.nan, 0.0, 'pCi/L']
-            df_list[n].loc[7, ["Contaminant", "State_PHG", "PHG_Date", "Federal_MCLG", "Units"]] = [
-                "Gross Beta Particle", np.nan, np.nan, 0.0, 'pCi/L']
-            df_list[n].loc[14, ["Contaminant", "Federal_MCLG", "Units"]] = [
-                'Radium-226 + Radium-228', 0.0, 'pCi/L']
+            df_list[n].loc[2, ["Contaminant", "State_MCL", "State_DLR", "State_PHG", "PHG_Date", "Federal_MCL", "Federal_MCLG", "Units"]] = [
+                "Gross Alpha Particle", 0.015, 0.003, np.nan, np.nan, 0.015, 0.0, 'pCi/L']
+            df_list[n].loc[7, ["Contaminant", "State_MCL", "State_DLR", "State_PHG", "PHG_Date", "Federal_MCL", "Federal_MCLG", "Units"]] = [
+                "Gross Beta Particle", 0.004, 0.004, np.nan, np.nan, 0.004, 0.0, 'mrem/yr']
+            df_list[n].loc[14, ["Contaminant", "State_MCL", "Federal_MCL",  "Federal_MCLG", "Units"]] = [
+                'Radium-226 + Radium-228', 0.005, 0.005, 0.0, 'pCi/L']
         elif n == 4:
-            df_list[n].loc[0, ["State_MCL", "State_DLR", "State_PHG"]] = [4.0, 1.0, 0.175]
-            df_list[n].loc[1, ["State_MCL", "State_DLR", "State_PHG", "Units"]] = [20000, 1000, 400, 'pCi/L']
-            df_list[n].loc[2, ["State_MCL", "State_DLR", "State_PHG", "Federal_MCL", "Federal_MCLG", 'Units']] = [30.0, 1.5, 0.64, 30, 0.0, 'ug/L']
+            df_list[n].loc[0, ["State_MCL", "State_DLR", "State_PHG", 'Units']] = [
+                0.008, 0.002, 0.00035, 'pCi/L']  # strontium-90
+            df_list[n].loc[1, ["State_MCL", "State_DLR", "State_PHG", "Units"]] = [
+                20, 1, .4, 'pCi/L']  # tritium
+            df_list[n].loc[2, ["State_MCL", "State_DLR", "State_PHG", "Federal_MCL", "Federal_MCLG", 'Units']] = [
+                0.02, 0.001, 0.00043, .030, 0.0, 'ug/L']  # uranium
         elif n == 5:
             df_list[n].loc[0, ["Federal_MCLG"]] = [0.0]
             df_list[n].loc[1, ["Federal_MCLG"]] = [0.0]
             df_list[n].loc[2, ["PHG_Date"]] = [2009]
             df_list[n].loc[3, ["Contaminant"]] = ['1,4-Dichlorobenzene(p-DCB)']
-            df_list[n].loc[4, ["Contaminant"]] = ['1,1-Dichloroethane (1,1-DCA)']
+            df_list[n].loc[4, ["Contaminant"]] = [
+                '1,1-Dichloroethane (1,1-DCA)']
             df_list[n].loc[5, ["Contaminant", "PHG_Date", "Federal_MCLG"]] = [
                 '1,2-Dichloroethane (1,2-DCA)', 2005, 0.0]
             df_list[n].loc[6, ["Contaminant"]] = [
@@ -158,11 +165,12 @@ def Decontaminate_Values(df_list):
             df_list[n].loc[5, ["Contaminant"]] = [
                 '2,4-Dichlorophenoxyacetic acid (2,4-D)']
             df_list[n].loc[6, ["Contaminant"]] = ['Di(2-ethylhexyl)adipate']
-            df_list[n].loc[7, ["Contaminant", "Federal_MCLG"]] = ['Di(2-ethylhexyl)phthalate (DEHP)', 0.0]
+            df_list[n].loc[7, ["Contaminant", "Federal_MCLG"]] = [
+                'Di(2-ethylhexyl)phthalate (DEHP)', 0.0]
             df_list[n].loc[8, ["PHG_Date"]] = [2010]
         elif n == 10:
             df_list[n].loc[1, ["Contaminant", "Federal_MCL", "Federal_MCLG"]] = [
-                'Ethylene dibromide (EDB)', 0.00005, 0.0]
+                'Ethylene dibromide (EDB)', .00005, 0.0]
             df_list[n].loc[3, ["Federal_MCLG"]] = [0.0]
             df_list[n].loc[4, ["Federal_MCLG"]] = [0.0]
             df_list[n].loc[5, ["Federal_MCLG"]] = [0.0]
@@ -174,14 +182,15 @@ def Decontaminate_Values(df_list):
                 'Polychlorinated biphenyls (PCBs)', 0.0]
             df_list[n].loc[3, ["Federal_MCLG"]] = [0.0]
             df_list[n].loc[4, ["Contaminant", "State_MCL", "State_DLR"]] = [
-                '1,2,3-Trichloropropane', 0.005, 0.005]
+                '1,2,3-Trichloropropane', .000005, .000005]
             df_list[n].loc[5, ["Contaminant", "State_MCL", "State_DLR", "State_PHG", "Federal_MCL",
-                               "Federal_MCLG", 'Units']] = ['2,3,7,8-TCDD (dioxin)', 30.0, 5.0, .05, 30.0, 0.0, 'pg/L']
+                               "Federal_MCLG"]] = ['2,3,7,8-TCDD (dioxin)', 3.0e-8, 5.0e-9, 5.0e-11, 3.0e-8, 0.0]
         elif n == 13:
             df_list[n].loc[2, ["Contaminant"]] = [
                 'Haloacetic Acids (five) (HAA5)']
-            df_list[n].loc[8, ["State_DLR", "Federal_MCLG"]] = [5.0, 0.0]
+            df_list[n].loc[8, ["State_DLR", "Federal_MCLG"]] = [.0000050, 0.0]
     return df_list
+
 
 # Change the datatypes from string to numeric
 def Decontaminate_Datatypes(df):
@@ -193,6 +202,14 @@ def Decontaminate_Datatypes(df):
     df.Federal_MCLG = pd.to_numeric(df.Federal_MCLG)
     return df 
 
+# Address the unit conversion from mg/L to ug/L - all others have been adjusted in Decon_values
+def Decontaminate_Unit_Conversion(df):
+    df['State_MCL'] = df['State_MCL'].apply(lambda x: x*1000)
+    df['State_DLR'] = df['State_DLR'].apply(lambda x: x*1000)
+    df['State_PHG'] = df['State_PHG'].apply(lambda x: x*1000)
+    df['Federal_MCL'] = df['Federal_MCL'].apply(lambda x: x*1000)
+    df['Federal_MCLG'] = df['Federal_MCLG'].apply(lambda x: x*1000)
+    return df
 
 # Adjust the names to match the naming conventions on the measured data
 def Decontaminate_Names(df):
@@ -282,5 +299,6 @@ def Decontaminate(filename):
     Decontaminate_Values(df_list)
     df = pd.concat(df_list, ignore_index=True)
     Decontaminate_Datatypes(df)
+    Decontaminate_Unit_Conversion(df)
     Decontaminate_Names(df)
     return df
