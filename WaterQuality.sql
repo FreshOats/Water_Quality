@@ -177,3 +177,6 @@ FROM
             l.*
      FROM state_regulations s
      INNER JOIN lab_results l ON l.parameter = s.Contaminant) AS regulated_contaminants;
+
+
+
