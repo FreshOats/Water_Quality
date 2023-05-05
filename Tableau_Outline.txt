@@ -1,0 +1,39 @@
+For the Tableau File: 
+
+
+STATE-MAPs
+First - convert the Latitude and Longitude to numeric, decimal, then change to geographical types. 
+
+The Longitude needs to be corrected in the file - it needs to be the negative of the absolute value of the Longitude - the current longitude places the coordinates in China
+
+For each of the contaminants I want to look at, I'll need to determine the minimum value, the state max, and then the measured maximum, otherwise Tableau just wants to take the maximum from all parameters
+Instead of having a filter, I'll need to keep the maps specific to the contaminants that I want to specifically target. 
+
+Years - change the sample date format to just date, include this as a Detail
+Fixed results should be changed to Continuous
+
+OVERVIEW---
+
+I'm thinking of making a dash for each major contaminant that people think about.
+I also want to include any of the contaminants that do exceed the state max anywhere, to give some info about these
+
+Will include the image of the state with the locations, -- change Map-> Background Maps to Outdoors
+
+Other insights we want to see - trends over the years from first measurements. 
+
+Need to figure out how to set a color gradient. I want the State Max to be where Red starts, and it should continue to be red anywhere at or above the state max. 
+Anything below can be yellow. As it approaches 0, the color should become more gray/white. 
+
+I'm liking the AVG(Fixed Result) defining the color, and the MAX(Fixed Result) in the Rows. County Name and YEAR(Sample Date) are in the Columns
+
+Remember NOT to use red and green for colorblind issues.
+Perhaps pick the top 3 or 4 counties with the worst contaminant issues? 
+
+Another insight - All counties with non-zero measurements. Columns: county Name, Rows: AVG(Fixed Result)
+Filters: contaminant, Sample Date - filter for the past 5 years only. Color by AVG(Fixed Result)
+Maybe filter this for only the top 5 counties? 
+
+All Stations with Averages higher than the state max over the past 5 years!
+
+MAP: Filters: Contaminant, Sample Date - only past 5 years, then AVG(Fixed Result), filter above a threshold, maybe the State Max
+Columns are Corrected_Longitude and Rows are Latitude, Color by AVG(Fixed Results) -- keeping map on streets gives the city names. 
