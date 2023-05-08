@@ -1,3 +1,21 @@
+5/8/2023
+Update: 
+Produced a Map with the average station values within 5 years, then Max concentration per county by year, and then average Concentration by county in the past 5 years
+Did this for: Arsenic, Nitrate, Chromium, Lead, and Mercury
+
+Next Step: 
+Query all contaminants within the past 5 years that individual stations were above state maximums
+Query all AVG for contaminants by county within the past 5 years that were over ther state maximums
+
+I want to create a map with different colors per contaminant, and then with sizes representing how far over the maximum they are by percentage.
+
+
+
+
+
+
+
+5/5/2023
 For the Tableau File: 
 
 
