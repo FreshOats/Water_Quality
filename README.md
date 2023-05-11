@@ -161,9 +161,41 @@ This returns a cleaned dataframe with appropriate units, data types, and in a si
 
 As I have been running queries to look at the lab data in concert with the state regulations, the initial 'completion' of milestone 1 was retracted a bit, since I discovered that there were different chemical naming conventions used in the lab data, unit differences, etc. (all mentioned above). So as the queries have been performed, the Decontaminate function has also been modified to allow for minimal processing of the lab_results table. 
 
-## Where things currently stand:
-The discrepancies in the lab_results table are those in which different labs collected data with different units of measure. These are listed in the file Mismatch_Results.md in the 02_State_Regulation_Processing folder. Most of them contain labs that measured in either ug/L or mg/L for the same contaminant. Mercury was measured with 3 different units, also adding ng/mL. 
+## Cleaning the lab_results data
+To maintain the fidelity of the original data, this table was not altered in Python, and rather these data were adjusted using SQL to create a new output table that could reduce the processing power and time needed to perform the necessary queries as well as import into Tableau for the creating of visualizations. 
 
-Since I do NOT want to acutally modify anything in the actual results, I can use calculated tables in SQL Server to make the appropriate conversions, and create a new table that can be used in Tableau. 
+### Units and Conversions
+The first minor hurdle was adjusting the units from either ug/L or mg/L, and because some of the labs measured the same contaminants with different units, I used the CASE clause to filter and multiply the value from the results column and output this value in a new column named "Fixed_Result". Furthermore, there were issues with the measurements of the Nitrates. There are 2 different methods to measure nitrate and nitrite concentrations - the direct concentration in mg/L, and the free nitrogen ion concentration, which, after doing some quick chemistry, requires multiplication by a factor to change the concentration of nitrate to the concentration of free nitrogen by how much nitrogen is present in the nitrate or nitrite. The only potentially problematic calculation would be the nitrate + nitrate, since there is no measure of the relative concentrations of each, but, fortunately, all of these measurements were made in mg/L as N, so no adjustments or assumptions needed to be made. 
 
-Furthermore, upon investigation, only 1/7th of the lab results are regulated in the state_regulations table. Since the purpose of this project is to look at the regions that near or exceed the regulatory limits, I have created a truncated table from the results of a Join of the state regulations with the results of the lab findings. This will allow for faster processing with the calculated tables and such. 
+### Creating the New Truncated Table
+After each of the conversions and unit adjustments were made, I used the SELECT * INTO () to create a new table named regulated_contaminants. This table joined the state_regulations table with the lab results using a LEFT JOIN; thus, none of the contaminants that were measured by the lab that did not have regulatory standards were not included in the query output. This query applied the CASE changes for the unit conversions and such. As a result, this output table included all of the original data from the state_regulations and the lab_results, but it also included the additional column with the fixed_result, including the calculations made to the results column in the CASE clause. 
+
+## Investigating the Data
+Using SQL, I wanted to look at the contaminants over time, but I really wanted to focus on the results from the past 5 years, so anything since January 1, 2018. Through a series of queries, I used both WITH clauses (common table expressions) and window functions to investigate the contaminants and their relative levels with regard to the state maximums. Ultimately, from these analyses, I had a good sense of what I wanted to show in the Tableau visualizations, only I was able to run these queries very quickly and identify potential relationships to look into. 
+
+---
+
+The creation of the regulated_contaminants table in conjunction with the queries that led to an outline of what I need to show in visualizations completes milestone 2.
+### Milestone 2: Complete
+
+
+
+
+--- 
+# Milestone 3: Tableau
+https://public.tableau.com/views/Water_Quality_16833247481940/StrontiumCountyAvg?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link
+
+I have started creating dashboards containing both maps as well as bar graphs showing the relative levels, maximums and averages of the typical offenders - Chromium, Lead, and Mercury, and then looked at the contaminants that are higher than the state standards for California. Since these data go back nearly 80 years for some of the measures, there are some HUGE differences over time, which have definitely impacted the averages. That being said, most of the graphs and analyses in Tableau restrict the data to the beginning of 2018 through 2022. This way there is a better measure of the recent levels of these contaminants.
+
+I have organized the data such that we can see the individual stations, and where they are located on the map along with maximum levels, and then following that with county average levels. I also have a by-county selectable chart in each that allows the user to investigate the levels over time. I think that it would make the most sense to put all of these in the same dash, since the user can then scroll through all of the counties at once, seeing the changes in chemicals over time. It is not currently organized this way, but will be in the future. 
+
+Finally, there is a map that only looks at the contaminants that still hold concentrations that are at least 2x the state maximum allowable. This map shows the individual stations. 
+Each of the graphs and maps contain both the state maximum and federal (if it exists) in addition to the measured concentration and county.
+
+### Color Scheme
+Since these measurements are continuous and each of the contaminants is measured on a different scale for their detrimental effects, the colors have been adapted to normalize the contaminants. The colors range on the maps from white to red. The maximum in the color scale is 2x the state maximum concentration. 
+
+In the charts and graphs, the color scale is a diverging scale, which is yellow in the safe region, and then gets redder as it approaches and passes the state maximum. The maximum on the scale has also been set to 2x the state maximum. The center of the scale was set to 1/5 of the maximum in each of them, to ensure fidelity of the color scheme and easier interpretation when comparing the contaminants. Since the Y-scaling of the graphs are so different, they have not been normalized to the state maximum, as many of the tables would not be visible. The tables only include entries that contained at least one measurement above 0. 
+
+### Map backgrounds
+I really like the maps that show the cities and streets because they give a better reference as to where in the state the stations are, but they make it very difficult to interpret the data. Perhaps I can create 2 pages, one with the street map and the second with the normal or dark for better contrast of where in the state the contaminants are - that way the user can look at familiar locations on the street map and then see how many measurements were taken in the other map or vice versa. 
