@@ -199,3 +199,15 @@ In the charts and graphs, the color scale is a diverging scale, which is yellow 
 
 ### Map backgrounds
 I really like the maps that show the cities and streets because they give a better reference as to where in the state the stations are, but they make it very difficult to interpret the data. Perhaps I can create 2 pages, one with the street map and the second with the normal or dark for better contrast of where in the state the contaminants are - that way the user can look at familiar locations on the street map and then see how many measurements were taken in the other map or vice versa. 
+
+### Updates to Animations and First 2 pages on Tableau
+I've added maps that show 113 years of all contamination over 100%, which can be a little misleading, so there is a button to go to the same map looking at the yearly change in an animation. 
+
+The next page created has been the changes over year of the 8 main contaminants... I'm not sure how impactful this is, given that the contaminants that go really high are way off the charts. 
+
+I'm thinking for the next set of pages, I'll run through each of the chemicals on their own 'page', which I think I can make into something that can just be filtered. This may be a better place to put the county charts, the map with the county averages and then talk about the dangers and impacts of each of the contaminants. 
+
+I should probably list all of the contaminants that have ever been found to exceed the state maximum level on the last page? Maybe briefly discuss the impact each of them had? 
+
+#### Buttons
+I've figured out how to make buttons, which are really useful for making it more like a website. I need to make sure that there is enough space on each page for some text. 
