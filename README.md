@@ -225,3 +225,48 @@ I've figured out how to make buttons, which are really useful for making it more
 The last major steps will be to add the written content for each of the pages, then format the content on each page for consistency. 
 
 I did look into poisonings, but it was a dead end. I think what's more important at this point is to aim to help people find the resources to get water tested, find water reports, and get access to safe water if they live in a questionable area. 
+
+
+
+--- 
+DB 1: I think I'm being poisoned
+This contains the maps with all Max and Timeline
+Navigation Links across the top
+Button to change from 75 to timeline
+Currently Contains "Investigate Contaminants" button
+
+Text: 
+This is an investigation of chemical contaminants in California's drinking water. The data were acquired from the CA government lab analyses from each water station in the state. The state standards set by the EPA were used as the reference to determine whether levels exceed the safe level or not. To be clear, 'safe' is used per the determination by the state's determination. In other words, if the level exceeds the safe level, it is not necessarily 'dangerous', it just exceeds the pre-determined safe level. Certain contaminants will be discussed more throroughly, including levels considered 'dangerous' by the CDC.
+
+--- 
+DB 2: State Auditor 2022 on the drinking water situation
+Two maps of CA showing # of people without safe water, # of failing water systems
+Contains all buttons
+
+Text: Nearly 1 million residents of California live in areas that fail to meet the safety regulations for one or more contaminant. 
+Most of these places are located in the central valley, and the residents who are impacted the most live in areas of lower socioeconomic status. There are about 30 million residents of California, so roughly 1/30th of the state's population is impacted by unsafe water. 
+
+While these data show where the water systems are failing, they do not show which contaminants are above the state levels. Not all contaminants are created equally: the long-term health impacts of exposure to higher levels of nitrates is substantially different from long-term exposure to metals like lead or arsenic. 
+
+---
+DB 3: COntaminants
+This shows a list of the contaminants that were both listed in the state regulatory information and tested for by at least one of the stations. All null values were excluded in these analyses, as they indicated that no data were collected at that site or time. These contaminants come from several sources: naturally occurring contaminants, pesticides, and fertilizers are the most common sources that introduce these contaminants into the water. it should be noted that the presence of these contaminants in the data shows the level after water treatment - this is the water that will be provided to consumers. 
+
+Click on the "Investigate Contaminants" Button to find links to the contaminants that are either infamous or measured as unsafe in at least one county. Each of these pages will give historical information as well as a recent subset of the data. Furthermore, the health impact of these contaminants will be provided.  
+
+--- 
+DB 4: Dangerous Places
+The table shows the maximum concentration of a particular contaminant from a station within the counties presented. The value shown is only from a single station, and it represents the worst source of water from within that county. The maximum was included here, as many of the stations measure 0 ug/L of these contaminants, so an average or median measurement doesn't demonstrate the safety concerns of the residents receiving water from that source. There is at least one station within these counties that yields the values presented. 
+
+The two contaminants that have the highest measurements are arsenic and strontium. The impact of strontium is minimal compared to that of arsenic. Strontium can be considered dangerous to very young children, as with constant exposure to strontium, the metal can interfere with natural bone development. Arsenic is usually thought of as a poison - and it can be lethal at high doeses. At a low concentration, the body metabolizes arsenic within 48 hours. This is not the concern we need to consider. The long-term exposure to low doses of arsenic can cause _____, and these effects occur in people of all ages. 
+
+# Maybe list these in order from dangerous to least dangerous? 
+Arsenic
+Mercury
+Strontium
+Antimony
+Nitrate?
+
+---
+DB 5: Help!
+Copy test from Tableau. 
