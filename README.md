@@ -211,3 +211,17 @@ I should probably list all of the contaminants that have ever been found to exce
 
 #### Buttons
 I've figured out how to make buttons, which are really useful for making it more like a website. I need to make sure that there is enough space on each page for some text. 
+
+
+--- 
+## Now has several pages for reports and contaminants
+- I have organized the "Investigate Contaminants" so that there is a nav button that links to each contaminant. Each of these pages will show a map that can be clicked on to look at the specific county. There is a graph that updates with the county selection to show the avg. concentration of that contaminant over time from 1947 to 2022. Additionally, I've included two time points, one investigating the past 75 years, and the other looking at the past 5. 
+- The title page still shows the scare-map with the Max Levels since 1947 per station, but with the button click will go to an automation that allows the user to see station maximums each year
+- The next page has information from the california audit in 2022, assessing the number of failing water treatment systems and addressing how many people (about 1 million) do not have accesss to water that meets state regulations, and the number of failing stations per county
+- Another page will show the worst counties from the past 5 years only - these only report counties that are at least 100%, but I think I'm going to reduce it to 90% of the maximum
+- There is a page that shows all of the contaminants that were reported - not sure if this is necessary
+- The last page is all about what you can do, with solutions both for homeowners capable of installing a system, or for those who can only use a counter-top or faucet solution. 
+
+The last major steps will be to add the written content for each of the pages, then format the content on each page for consistency. 
+
+I did look into poisonings, but it was a dead end. I think what's more important at this point is to aim to help people find the resources to get water tested, find water reports, and get access to safe water if they live in a questionable area. 
