@@ -55,3 +55,130 @@ All Stations with Averages higher than the state max over the past 5 years!
 
 MAP: Filters: Contaminant, Sample Date - only past 5 years, then AVG(Fixed Result), filter above a threshold, maybe the State Max
 Columns are Corrected_Longitude and Rows are Latitude, Color by AVG(Fixed Results) -- keeping map on streets gives the city names. 
+
+--- 
+
+# Antimony
+An elemental semimetal, Sb
+Very high levels of antimony in drinking water can cause nausea, vomiting, abdominal pain, and diarrhea. 
+Stomach ulcers have been seen in animals exposed to high levels of dissolved antimony for several months.
+Long-term exposure can lead to higher blood cholesterol, decreased blood sugar, decreased infant growth, and irritation of the eyes and skin.
+
+Most antimony exposure is through the air, not in drinking water.
+
+The safe level of antimony is anything less than ___
+Antimony is considered dangerous at concentrations higher than 30 mg/L, or 30,000 ug/L
+
+Antimony usually gets into the environment as a result of mining and ore processing. 
+
+Erskine Creek in Kern County, CA has several mines with exceptionally high concentrations of antimony in the rock. 
+
+https://www.knowyourh2o.com/indoor-6/antimony
+
+
+# Arsenic
+Arsenic is a semimetal, recognized by the World Health Organization as the most significant chemical contaminant in drinking water globally
+Arsenic contamination affects 44 people in the USA, and approximately 2 million of them get their water from private wells
+Sources of arsenic contamination can be natural or industrial. 
+
+Health risks from arsenic include stomach pain, nausea, vomiting, diarrhea, cancer, liver disease, diabetes, hypertention, cardiovascular problems, thickening and discoloration of the skin, nervous system disorders, numbness, partial paralysis, and blindness.
+Low levels of arsenic exposure over 5 years has been correlated with heart damage.
+Long-term low level exposure can also lead to cancers of the bladder and lungs. It is also associated with adverse prenganacy outcomes and infant mortality.
+
+Contaminated water used for drinking, food preparation, and irrigation of food crops are the greatest threats to Health
+
+
+https://www.who.int/news-room/fact-sheets/detail/arsenic
+
+# Chromium 
+An elemental heavy metal that occurs naturally as Chromium-3, an essential dietary element, and often as a manufacturing byproduct as Chromium-6. 
+Chromium-6 is introduced into the environment through improper containmant, waste-disposal practices, and leakage.
+
+Chromium-6 is potentially carcinogenic... the presence of high concentrations of chromium-6 is highly correlated with a high incidence of cancer in residents exposed to the contaminated water
+Chronic exposure to chromium-6 can damange the liver, reproductive systems, lower body weight, and delay skeletal development. 
+
+Chromium in the water is measured as Total Chromium, as the Chromium-3 and Chromium-6 forms can convert into one another in water. 
+Measurement of total chromium assumes that 100% of the total chromium is as the toxic form Chromium-6
+
+The (ghost) town of Hinkley, California in San Bernardino County has had its groundwater contaminated with Chromium-6
+The Pacific Gas and Electric Company dumped about 370 miillion gallons of chromium-tainted wastewater into unlined spreading ponds, 
+from 1952 to 1966, contaminating the groundwater. This was investigated in 1993 by legal clerk Erin Brokivich, which was made into a movie in 2000.  
+
+As of 2023, the Chromium Plume is not contained, despite efforts by PG&E to be contained, and is at risk of contaminating a deeper aquifer
+
+https://www.waterboards.ca.gov/lahontan/water_issues/projects/pge/
+https://www.epa.gov/sdwa/chromium-drinking-water
+
+# Lead
+Lead is a naturally occurring heavy metal, which is highly toxic, and there is no safe level of lead exposure.
+Strangely, there is a limit set by the California EPA, however on the map, all regions with lead present are labeled in red, as any presence of lead is dangerous.
+
+Different from other contaminants, lead can bioaccumulate and is not metabolized or passed out of the body. 
+It is estimated that 20% of lead exposure in children comes from contaminated drinking water.
+
+Lead accumulates over time in the body and tends to be stored in the brain, bones, kidneys, and other major organs. 
+High levels of lead contamination can lead to convulsions, major neurological damage, organ failure, coma, and death.
+Moderate to low levels of exposure can lead ot hearing loss, inhibit groth in children, and cause learning disabilies.
+Some effects of lead poisoning cannot be cured. 
+
+https://www.knowyourh2o.com/indoor-6/lead
+
+# Mercury
+Mercury is a naturally occurring heavy metal
+The major source of mercury in the envirment is by distribution from volcanic activity.
+It exists in 3 forms, with organic forms being the most hazardous. 
+Organic mercury bioaccumulates in the body, and can enter the body by skin absorption, inhalation, and ingestion.
+
+Organic mercury can affect the kidneys, nervous system, and has been associated with cerebral palsey and developmental disorders in infants.
+Most people are exposed to mercury by eating food contaminated with bioaccumulated mercury rather than through drinking water.
+
+https://www.knowyourh2o.com/indoor-6/mercury
+
+# Nitrates / Nitrites
+Nitrate and Nitrite are Nitrogen compounds that present the necessary nitrogen for plant growth. 
+Nitrate-Nitrogen and Nitrite-Nitrogen in groundwater may result from sewage disposal, livestock facilities, and other fertilizers. 
+
+The primary concern with nitrates and nitrites is related to exposure through consumption by infants.
+
+Infants under 6 months of age lack the capability to rapidly convert methemoglobin back to oxyhemoglobin in the red blood cells. 
+
+Another issue associated with nitrates is high algal production in ponds, lakes, and even streams, which can have a massive impact on the ecosystem
+
+https://www.knowyourh2o.com/indoor-6/nitrates-nitrites
+
+# Strontium
+Strontium is an alkaline earth metal, acting similar to calcium and magnesium. 
+High levels of strontium can replace calcium and magnesium needed for bone growth and bone strength.
+This has the highest impact on children and infants. 
+
+Infants or young children can develop strontium rickets, deformities ofr the long bones of the legs, and can also delay the closer of fontanelles (the soft spot of the cranium)
+
+
+
+
+https://www.knowyourh2o.com/indoor-6/strontium#:~:text=The%20EPA%20has%20a%20non,%2C%20beverages%2C%20or%20infant%20formula.
+
+
+
+
+--- 
+DB 2: State Auditor 2022 on the drinking water situation
+Two maps of CA showing # of people without safe water, # of failing water systems
+Contains all buttons
+
+Text: Nearly 1 million residents of California live in areas that fail to meet the safety regulations for one or more contaminant. 
+Most of these places are located in the central valley, and the residents who are impacted the most live in areas of lower socioeconomic status. There are about 30 million residents of California, so roughly 1/30th of the state's population is impacted by unsafe water. 
+
+While these data show where the water systems are failing, they do not show which contaminants are above the state levels. Not all contaminants are created equally: the long-term health impacts of exposure to higher levels of nitrates is substantially different from long-term exposure to metals like lead or arsenic. 
+
+---
+DB 3: COntaminants
+This shows a list of the contaminants that were both listed in the state regulatory information and tested for by at least one of the stations. All null values were excluded in these analyses, as they indicated that no data were collected at that site or time. These contaminants come from several sources: naturally occurring contaminants, pesticides, and fertilizers are the most common sources that introduce these contaminants into the water. it should be noted that the presence of these contaminants in the data shows the level after water treatment - this is the water that will be provided to consumers. 
+
+Click on the "Investigate Contaminants" Button to find links to the contaminants that are either infamous or measured as unsafe in at least one county. Each of these pages will give historical information as well as a recent subset of the data. Furthermore, the health impact of these contaminants will be provided.  
+
+--- 
+DB 4: Dangerous Places
+The table shows the maximum concentration of a particular contaminant from a station within the counties presented. The value shown is only from a single station, and it represents the worst source of water from within that county. The maximum was included here, as many of the stations measure 0 ug/L of these contaminants, so an average or median measurement doesn't demonstrate the safety concerns of the residents receiving water from that source. There is at least one station within these counties that yields the values presented. 
+
+The two contaminants that have the highest measurements are arsenic and strontium. The impact of strontium is minimal compared to that of arsenic. Strontium can be considered dangerous to very young children, as with constant exposure to strontium, the metal can interfere with natural bone development. Arsenic is usually thought of as a poison - and it can be lethal at high doeses. At a low concentration, the body metabolizes arsenic within 48 hours. This is not the concern we need to consider. The long-term exposure to low doses of arsenic can cause _____, and these effects occur in people of all ages. 

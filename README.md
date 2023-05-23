@@ -1,6 +1,6 @@
 # California Water Quality Analytics
 
-If you're anything like I am, there is only 1 time of the year that is more exciting than any holiday: the release of the water quality reports! This project will be looking into the different facets of water quality throughout the state of California to provide insights on how to better utilize our most precious resource.  
+If you're anything like I am, there is only 1 time of the year that is more exciting than any holiday: the release of the water quality reports! This project looks into the past and present chemical contamination in the state of California to provide insights on how to better understand the safety of our most precious resource.  
 
 
 
@@ -9,11 +9,9 @@ Milestone 1: Python - Decontaminate the Water Standards Table
 
 Milestone 2: SQL - Add standards table, and fix the units in the raw data 
 
-Milestone 3: Power BI/Tableau - Look at relative levels compared to the safety standards throughout the state
+Milestone 3: Tableau - Look at relative levels compared to the safety standards throughout the state
 
-Milestone 4: Determine where True Crime fanatics may find false positives of attempted murder by poisoning their drinking water.
-
-Milestone 5: Flask/Render - Deploy website with findings 
+Milestone 4: Deploy with findings 
 
 ---
 
@@ -30,10 +28,6 @@ Tables:
 4. Field Results
 5. ArcGIS Map Service - https://gis.water.ca.gov/arcgis/rest/services/Geoscientific/i08_Stations_Discrete_Grab_Water_Quality/MapServer
 6. ArcGIS Feature Service - https://gis.water.ca.gov/arcgis/rest/services/Geoscientific/i08_Stations_Discrete_Grab_Water_Quality/FeatureServer
-
-
-Issue 1:  longitude is mostly positive, only 2 values were originally negative, but this plots the stations of California in China. All longitude values must be negative. 
-Fix 1: -ABS(longitude) to all SQL tables in Power BI
 
 ---
 # Milestone 1: The Water Standards
@@ -179,18 +173,17 @@ The creation of the regulated_contaminants table in conjunction with the queries
 ### Milestone 2: Complete
 
 
-
-
 --- 
 # Milestone 3: Tableau
 https://public.tableau.com/views/Water_Quality_16833247481940/StrontiumCountyAvg?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link
 
-I have started creating dashboards containing both maps as well as bar graphs showing the relative levels, maximums and averages of the typical offenders - Chromium, Lead, and Mercury, and then looked at the contaminants that are higher than the state standards for California. Since these data go back nearly 80 years for some of the measures, there are some HUGE differences over time, which have definitely impacted the averages. That being said, most of the graphs and analyses in Tableau restrict the data to the beginning of 2018 through 2022. This way there is a better measure of the recent levels of these contaminants.
+Tableau was used to create a completely interactive multi-page site to showcase the contaminants that have exceeded the current state levels for safe water going back 75 years as well as only considering the past 5  years. It provides information by station and county. Each map and graph can be observed using 75 or 5 years of data. After the assembly of the EPA and the discovery of the dangers of different fertilizers and pesticides, the acceptible levels of these toxins were reduced, so while the data from the past 75 years show high averages, the past five years may yield an average of 0.0% in the drinking water. It is important to see the history of the contaminants in the water, because while it may no longer be present in drinking water, it may still have persistent contamination in the soil.
 
-I have organized the data such that we can see the individual stations, and where they are located on the map along with maximum levels, and then following that with county average levels. I also have a by-county selectable chart in each that allows the user to investigate the levels over time. I think that it would make the most sense to put all of these in the same dash, since the user can then scroll through all of the counties at once, seeing the changes in chemicals over time. It is not currently organized this way, but will be in the future. 
+Individual pages were created for the 8 most prevalent or dangerous contaminants in California: Antimony, Arsenic, Chromium, Lead, Mercury, Nitrate and Nitrite, and Strontium. Facts about these contaminants can be accessed on a page that shows their county-wide distribution and concentration, the history by county, and a bar graph showing the counties with a non-zero measure of that contaminant compared to the safe concentration set by the CA-EPA. On these pages, the user can also select the county on the map to see specific information on the timeline and bar graphs - the y-axis automatically adjusts to the highest level prior to selection, but upon selection it automatically adjusts to the maximum on that county. 
 
-Finally, there is a map that only looks at the contaminants that still hold concentrations that are at least 2x the state maximum allowable. This map shows the individual stations. 
-Each of the graphs and maps contain both the state maximum and federal (if it exists) in addition to the measured concentration and county.
+The other pages show the 2022 state audit of safe water in California, showing that 2.6% of Californians, just less than 1 million residents, do not have access to safe water and are receiving contaminated water. That being said, not all contaminants are equal. The threat of a low-concentration exposure to arsenic or lead is substantially more concerning than an unsafe concentration of antimony, strontium, or nitrate. Following this analysis, all contaminants investigated are presented, also showing the difference between unsafe and dangerous. Continuing, there is a page that provides information to people who may live in an are with potentially contaminated water, with links and resources to determine whether this is the case. 
+
+A final page provides solutions for dealing with contaminated water. Since most of the regions with contaminated water are located in the Central Valley, and the majority of consumers without access to safe water tend to be in lower-income regions, the majority of solutions are provided with renters in mind. An expensive installation of a top-of-the-line reverse osmosis system is not only out of the price-range, but also likely not something that a renter can even install. 
 
 ### Color Scheme
 Since these measurements are continuous and each of the contaminants is measured on a different scale for their detrimental effects, the colors have been adapted to normalize the contaminants. The colors range on the maps from white to red. The maximum in the color scale is 2x the state maximum concentration. 
@@ -198,75 +191,18 @@ Since these measurements are continuous and each of the contaminants is measured
 In the charts and graphs, the color scale is a diverging scale, which is yellow in the safe region, and then gets redder as it approaches and passes the state maximum. The maximum on the scale has also been set to 2x the state maximum. The center of the scale was set to 1/5 of the maximum in each of them, to ensure fidelity of the color scheme and easier interpretation when comparing the contaminants. Since the Y-scaling of the graphs are so different, they have not been normalized to the state maximum, as many of the tables would not be visible. The tables only include entries that contained at least one measurement above 0. 
 
 ### Map backgrounds
-I really like the maps that show the cities and streets because they give a better reference as to where in the state the stations are, but they make it very difficult to interpret the data. Perhaps I can create 2 pages, one with the street map and the second with the normal or dark for better contrast of where in the state the contaminants are - that way the user can look at familiar locations on the street map and then see how many measurements were taken in the other map or vice versa. 
+To achieve the effect of the danger and maintain a dark background for the vis, I'm using the Dark map. It's as not necessary to see the streets and cities as it is to see the distribution of locations, and upon hover-over, the county names and relative levels are shown. I have only included the city names on the timeline map, since this is the only one that isn't covered such that it would be difficult to impossible to see the city names, as they would be covered by the data elements. 
 
-### Updates to Animations and First 2 pages on Tableau
-I've added maps that show 113 years of all contamination over 100%, which can be a little misleading, so there is a button to go to the same map looking at the yearly change in an animation. 
 
-The next page created has been the changes over year of the 8 main contaminants... I'm not sure how impactful this is, given that the contaminants that go really high are way off the charts. 
-
-I'm thinking for the next set of pages, I'll run through each of the chemicals on their own 'page', which I think I can make into something that can just be filtered. This may be a better place to put the county charts, the map with the county averages and then talk about the dangers and impacts of each of the contaminants. 
-
-I should probably list all of the contaminants that have ever been found to exceed the state maximum level on the last page? Maybe briefly discuss the impact each of them had? 
-
-#### Buttons
-I've figured out how to make buttons, which are really useful for making it more like a website. I need to make sure that there is enough space on each page for some text. 
-
+### Animations and Buttons
+The title page utilizes and animation that walks through 75 years of contamination data that exceeds the threshold. Each page has a set of Navigation buttons that redirect to different pages like a website, and in addition has buttons that show or hide either text, a menu, or images.
 
 --- 
-## Now has several pages for reports and contaminants
-- I have organized the "Investigate Contaminants" so that there is a nav button that links to each contaminant. Each of these pages will show a map that can be clicked on to look at the specific county. There is a graph that updates with the county selection to show the avg. concentration of that contaminant over time from 1947 to 2022. Additionally, I've included two time points, one investigating the past 75 years, and the other looking at the past 5. 
-- The title page still shows the scare-map with the Max Levels since 1947 per station, but with the button click will go to an automation that allows the user to see station maximums each year
-- The next page has information from the california audit in 2022, assessing the number of failing water treatment systems and addressing how many people (about 1 million) do not have accesss to water that meets state regulations, and the number of failing stations per county
-- Another page will show the worst counties from the past 5 years only - these only report counties that are at least 100%, but I think I'm going to reduce it to 90% of the maximum
-- There is a page that shows all of the contaminants that were reported - not sure if this is necessary
-- The last page is all about what you can do, with solutions both for homeowners capable of installing a system, or for those who can only use a counter-top or faucet solution. 
-
-The last major steps will be to add the written content for each of the pages, then format the content on each page for consistency. 
-
-I did look into poisonings, but it was a dead end. I think what's more important at this point is to aim to help people find the resources to get water tested, find water reports, and get access to safe water if they live in a questionable area. 
-
-
-
---- 
-DB 1: I think I'm being poisoned
-This contains the maps with all Max and Timeline
-Navigation Links across the top
-Button to change from 75 to timeline
-Currently Contains "Investigate Contaminants" button
-
-Text: 
-This is an investigation of chemical contaminants in California's drinking water. The data were acquired from the CA government lab analyses from each water station in the state. The state standards set by the EPA were used as the reference to determine whether levels exceed the safe level or not. To be clear, 'safe' is used per the determination by the state's determination. In other words, if the level exceeds the safe level, it is not necessarily 'dangerous', it just exceeds the pre-determined safe level. Certain contaminants will be discussed more throroughly, including levels considered 'dangerous' by the CDC.
-
---- 
-DB 2: State Auditor 2022 on the drinking water situation
-Two maps of CA showing # of people without safe water, # of failing water systems
-Contains all buttons
-
-Text: Nearly 1 million residents of California live in areas that fail to meet the safety regulations for one or more contaminant. 
-Most of these places are located in the central valley, and the residents who are impacted the most live in areas of lower socioeconomic status. There are about 30 million residents of California, so roughly 1/30th of the state's population is impacted by unsafe water. 
-
-While these data show where the water systems are failing, they do not show which contaminants are above the state levels. Not all contaminants are created equally: the long-term health impacts of exposure to higher levels of nitrates is substantially different from long-term exposure to metals like lead or arsenic. 
-
----
-DB 3: COntaminants
-This shows a list of the contaminants that were both listed in the state regulatory information and tested for by at least one of the stations. All null values were excluded in these analyses, as they indicated that no data were collected at that site or time. These contaminants come from several sources: naturally occurring contaminants, pesticides, and fertilizers are the most common sources that introduce these contaminants into the water. it should be noted that the presence of these contaminants in the data shows the level after water treatment - this is the water that will be provided to consumers. 
-
-Click on the "Investigate Contaminants" Button to find links to the contaminants that are either infamous or measured as unsafe in at least one county. Each of these pages will give historical information as well as a recent subset of the data. Furthermore, the health impact of these contaminants will be provided.  
-
---- 
-DB 4: Dangerous Places
-The table shows the maximum concentration of a particular contaminant from a station within the counties presented. The value shown is only from a single station, and it represents the worst source of water from within that county. The maximum was included here, as many of the stations measure 0 ug/L of these contaminants, so an average or median measurement doesn't demonstrate the safety concerns of the residents receiving water from that source. There is at least one station within these counties that yields the values presented. 
-
-The two contaminants that have the highest measurements are arsenic and strontium. The impact of strontium is minimal compared to that of arsenic. Strontium can be considered dangerous to very young children, as with constant exposure to strontium, the metal can interfere with natural bone development. Arsenic is usually thought of as a poison - and it can be lethal at high doeses. At a low concentration, the body metabolizes arsenic within 48 hours. This is not the concern we need to consider. The long-term exposure to low doses of arsenic can cause _____, and these effects occur in people of all ages. 
-
-# Maybe list these in order from dangerous to least dangerous? 
-Arsenic
-Mercury
-Strontium
-Antimony
-Nitrate?
-
----
-DB 5: Help!
-Copy test from Tableau. 
+# References
+Data Source: https://data.ca.gov/dataset/water-quality-data
+https://www.cdph.ca.gov/
+https://calepa.ca.gov/
+https://www.epa.gov/sdwa/chromium-drinking-water
+https://www.waterboards.ca.gov/lahontan/water_issues/projects/pge/
+https://www.who.int/news-room/fact-sheets/detail/arsenic
+https://www.knowyourh2o.com
