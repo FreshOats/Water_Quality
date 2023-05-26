@@ -175,7 +175,7 @@ The creation of the regulated_contaminants table in conjunction with the queries
 
 --- 
 # Milestone 3: Tableau
-https://public.tableau.com/views/Water_Quality_16833247481940/StrontiumCountyAvg?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link
+https://public.tableau.com/views/IThinkImBeingPoisoned-AWaterQualityAnalysis/TitlePage?:language=en-US&:display_count=n&:origin=viz_share_link
 
 Tableau was used to create a completely interactive multi-page site to showcase the contaminants that have exceeded the current state levels for safe water going back 75 years as well as only considering the past 5  years. It provides information by station and county. Each map and graph can be observed using 75 or 5 years of data. After the assembly of the EPA and the discovery of the dangers of different fertilizers and pesticides, the acceptible levels of these toxins were reduced, so while the data from the past 75 years show high averages, the past five years may yield an average of 0.0% in the drinking water. It is important to see the history of the contaminants in the water, because while it may no longer be present in drinking water, it may still have persistent contamination in the soil.
 
@@ -197,7 +197,21 @@ To achieve the effect of the danger and maintain a dark background for the vis, 
 ### Animations and Buttons
 The title page utilizes and animation that walks through 75 years of contamination data that exceeds the threshold. Each page has a set of Navigation buttons that redirect to different pages like a website, and in addition has buttons that show or hide either text, a menu, or images.
 
+
+### Milestone 3: Complete
+
 --- 
+# Milestone 4: Deploy
+
+https://public.tableau.com/views/IThinkImBeingPoisoned-AWaterQualityAnalysis/TitlePage?:language=en-US&:display_count=n&:origin=viz_share_link
+
+The Tableau viz has been completed. It has been deployed on Tableau Public. Need to link directly to the repo and have a direct link from portfolio and github profile. Finally need to oragnize the data cleaning notes, programs, procedures and write up the full documentation. 
+
+
+
+
+
+
 # References
 Data Source: https://data.ca.gov/dataset/water-quality-data
 https://www.cdph.ca.gov/
