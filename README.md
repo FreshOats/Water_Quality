@@ -1,7 +1,12 @@
 # California Water Quality Analytics
 
-If you're anything like I am, there is only 1 time of the year that is more exciting than any holiday: the release of the water quality reports! This project looks into the past and present chemical contamination in the state of California to provide insights on how to better understand the safety of our most precious resource.  
+If you're anything like I am, there is only 1 time of the year that is more exciting than any holiday: the release of the annual water quality report! This project looks into the past and present chemical contamination in the state of California to provide insights on how to better understand the safety of our most precious resource.  
 
+The project was broken down into several phases, starting with the data acquisition and exploratory data analysis. The next phase was the ETL, which was the bulk of the project - the contaminated water data were unclean on a level that rivals some of the counties' water supplies. After the cleaned data were loaded to a SQL server, a series of queries were used to find relationships and patterns with safe, unsafe, and dangerous levels of contaminants. The third phase was creating a series of dashboards to showcase the findings using Tableau. And finally the final deployment of the visualizations, programming, and overall assessment of the water quality. 
+
+Data were acquired from the California Open Data Portal, which provided drinking water reports back as far as 1909. There were very comprehensive data covering field results and lab results, but most of the measures and standards set don't reflect the safety of the water, for example the pH and turbidity of the water. Similarly the amount of sediment, smells, and flavors in the water have goals by the California State Water Board, but these do not impact the health and safety of the drinking water. 
+
+The standards that were used for this project came from the California Water Board in a file last updated on January 3, 2023, titled 'MCLs, DRLs, PHGs, for Regulated Drinking Water Contaminants', set by the Office of Environmental Health Hazard Assessment (OEHHA) in California as well as including the federal regulations set by the United States Envioronmental Protection Agency (USEPA). In all cases considered, the OEHHA regulations were stricter than the USEPA regulations. At this point I would like to note that all of the contaminants in the regulatory documentation were chemical contaminants. These did not include biological contaminants such as e. coli, salmonella, etc. Therefore the scope of this project and findings are limited to chemical contaminants in California's drinking water during the years when such contaminants were measured. 
 
 
 ## Project Pipeline: 
@@ -15,22 +20,27 @@ Milestone 4: Deploy with findings
 
 ---
 
-
 Data Source: https://data.ca.gov/dataset/water-quality-data
 California Open Data Portal
 California Department of Water Resources
 Water Quality Data
 
-Tables: 
+The tables provided with the original data from the Open Data Portal: 
 1. Stations
 2. Period of Record by Station and Parameter
 3. Lab Results
 4. Field Results
-5. ArcGIS Map Service - https://gis.water.ca.gov/arcgis/rest/services/Geoscientific/i08_Stations_Discrete_Grab_Water_Quality/MapServer
-6. ArcGIS Feature Service - https://gis.water.ca.gov/arcgis/rest/services/Geoscientific/i08_Stations_Discrete_Grab_Water_Quality/FeatureServer
+5. ArcGIS Map Service
+6. ArcGIS Feature Service
 
 ---
 # Milestone 1: The Water Standards
+The first phase of the project involved the data acquisition, exploratory data analysis, and ETL (extract, transform, load). The files from the EDA remain in the 01_EDA folder in the Repository, and utilized a combination of Jupyter files to look at the data as well as uploading to SQL server to do a series of queries to get a better understanding of what these data contained. 
+
+Following this, the next hurdle was extracting the OEHHA and USEPA standards from the regulatory guide, which was only available in .pdf format, broken into numerous tables, not all with matching dimensions. The files related to this processing are in the folder 02_State_Regulation_Processing. The result of the data processing was the file Decontaminate.py, which reamins in the MAIN. The following outlines the program Decontaminate.py and the subroutines used to clean the data and what cleaning processes were needed to organize and provide matching cases to the data that would be joined in the lab_results of the raw data.
+
+It must be noted at this time, that this was a very iterative process, since there were many conventions, units, and naming discrepancies between the standards and the acquired data in the lab_results, even across different water stations. Since the standards table is unlikely to add many new fields, I opted to make the changes in convention and units to this table.
+
 ## Decontaminate.py
 
 **Decontaminate.py** is a function with a series of subroutines to clean different aspects of the data, starting with the input of the raw pdf file, and outputting a csv to be input into a SQL server.
@@ -147,7 +157,8 @@ def Decontaminate(filename):
     return df
 ```
 
-This returns a cleaned dataframe with appropriate units, data types, and in a single concatenated table. 
+This returns a cleaned dataframe with appropriate units, data types, and in a single concatenated table. To ensure the fidelity of the raw data from Lab Results, any modifications or calculations to these data will be done with the addition of calculated tables in either SQL or Tableau, which will add additional columns to make such adjustments, and not actually change the data. Thus, this concludes the processing for the first mileston. 
+
 ### Milestone 1: Complete
 
 --- 
@@ -167,7 +178,6 @@ After each of the conversions and unit adjustments were made, I used the SELECT 
 ## Investigating the Data
 Using SQL, I wanted to look at the contaminants over time, but I really wanted to focus on the results from the past 5 years, so anything since January 1, 2018. Through a series of queries, I used both WITH clauses (common table expressions) and window functions to investigate the contaminants and their relative levels with regard to the state maximums. Ultimately, from these analyses, I had a good sense of what I wanted to show in the Tableau visualizations, only I was able to run these queries very quickly and identify potential relationships to look into. 
 
----
 
 The creation of the regulated_contaminants table in conjunction with the queries that led to an outline of what I need to show in visualizations completes milestone 2.
 ### Milestone 2: Complete
@@ -181,9 +191,11 @@ Tableau was used to create a completely interactive multi-page site to showcase 
 
 Individual pages were created for the 8 most prevalent or dangerous contaminants in California: Antimony, Arsenic, Chromium, Lead, Mercury, Nitrate and Nitrite, and Strontium. Facts about these contaminants can be accessed on a page that shows their county-wide distribution and concentration, the history by county, and a bar graph showing the counties with a non-zero measure of that contaminant compared to the safe concentration set by the CA-EPA. On these pages, the user can also select the county on the map to see specific information on the timeline and bar graphs - the y-axis automatically adjusts to the highest level prior to selection, but upon selection it automatically adjusts to the maximum on that county. 
 
-The other pages show the 2022 state audit of safe water in California, showing that 2.6% of Californians, just less than 1 million residents, do not have access to safe water and are receiving contaminated water. That being said, not all contaminants are equal. The threat of a low-concentration exposure to arsenic or lead is substantially more concerning than an unsafe concentration of antimony, strontium, or nitrate. Following this analysis, all contaminants investigated are presented, also showing the difference between unsafe and dangerous. Continuing, there is a page that provides information to people who may live in an are with potentially contaminated water, with links and resources to determine whether this is the case. 
+The other pages show the 2022 state audit of safe water in California, showing that 2.6% of Californians, just less than 1 million residents, do not have access to safe water and are receiving contaminated water. That being said, not all contaminants are equal. The threat of a low-concentration exposure to arsenic or lead is substantially more concerning than an unsafe concentration of antimony, strontium, or nitrate. Following this analysis, all contaminants investigated are presented, also showing the difference between unsafe and dangerous. Continuing, there is a page that provides information to people who may live in an are with potentially contaminated water, with links and resources to determine whether this is the case.
 
-A final page provides solutions for dealing with contaminated water. Since most of the regions with contaminated water are located in the Central Valley, and the majority of consumers without access to safe water tend to be in lower-income regions, the majority of solutions are provided with renters in mind. An expensive installation of a top-of-the-line reverse osmosis system is not only out of the price-range, but also likely not something that a renter can even install. 
+Additional concerns by the CA State Auditor was that there were over 370 failing water systems in the state, providing 920,000 residents, but even more concerning are the over 450 additional water systems that are nearing failing levels that do serve over 1,000,000 additional residents. While this information is very concerning, again I have to return to the fact that all contaminants are not equal. Having unsafe water isn't the same as having dangerous water, and long-term exposure to strontium may have no effect on adults, whereas long-term exposure of arsenic will. 
+
+Two final pages provide resources and solutions for dealing with contaminated water. Since most of the regions with contaminated water are located in the Central Valley, and the majority of consumers without access to safe water tend to be in lower-income regions, the majority of solutions are provided with renters in mind. An expensive installation of a top-of-the-line reverse osmosis system is not only out of the price-range, but also likely not something that a renter can even install. There is a broad range of renter-friendly solutions including pitchers with specialized filters, faucet filters with specialized filters, and even counter-top Reverse Osmosis and Distillation filtration systems that attach to a faucet but can be removed if necessary. The caveat to the cheaper solutions of the pitchers and faucet filters, specialized filters must be purchased to ensure that they are filtering out the contaminants that are present - Arsenic is not removed by most over-the-counter filters, but there are available filters by PUR and ZeroWater that remove such. 
 
 ### Color Scheme
 Since these measurements are continuous and each of the contaminants is measured on a different scale for their detrimental effects, the colors have been adapted to normalize the contaminants. The colors range on the maps from white to red. The maximum in the color scale is 2x the state maximum concentration. 
@@ -197,15 +209,20 @@ To achieve the effect of the danger and maintain a dark background for the vis, 
 ### Animations and Buttons
 The title page utilizes and animation that walks through 75 years of contamination data that exceeds the threshold. Each page has a set of Navigation buttons that redirect to different pages like a website, and in addition has buttons that show or hide either text, a menu, or images.
 
+### Individual Contaminants
+The 8 contaminants that are either exceeding limits in California or are just known as particularly dangerous each have their own dashboard. These dashboards show a map broken up by county with the level of contaminant, and the color scheme going from gray - benign to red - toxic. Linked to the counties on the map are two graphs, one bar graph to show all of the counties' levels of that contaminant in relation to the state maximum level, and another that shows a timeline from the earliest measurements through 2022. For the first 2 visuals, there is a page selection that allows the user to look at the differences between the results of the past 75 years and the past 5 years alone. 
+
+The Tableau visualization was publised on Tabluea Public as 'I think I'm Being Poisoned', which can be found with the link:
+https://public.tableau.com/views/IThinkImBeingPoisoned-AWaterQualityAnalysis/TitlePage?:language=en-US&:display_count=n&:origin=viz_share_link
+
+This completes the 3rd milestone. 
 
 ### Milestone 3: Complete
 
 --- 
 # Milestone 4: Deploy
 
-https://public.tableau.com/views/IThinkImBeingPoisoned-AWaterQualityAnalysis/TitlePage?:language=en-US&:display_count=n&:origin=viz_share_link
-
-The Tableau viz has been completed. It has been deployed on Tableau Public. Need to link directly to the repo and have a direct link from portfolio and github profile. Finally need to oragnize the data cleaning notes, programs, procedures and write up the full documentation. 
+ Need to link directly to the repo and have a direct link from portfolio and github profile. Finally need to oragnize the data cleaning notes, programs, procedures and write up the full documentation. 
 
 
 
@@ -214,6 +231,7 @@ The Tableau viz has been completed. It has been deployed on Tableau Public. Need
 
 # References
 Data Source: https://data.ca.gov/dataset/water-quality-data
+Standards Source: https://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/documents/mclreview/mcls_dlrs_phgs.pdf
 https://www.cdph.ca.gov/
 https://calepa.ca.gov/
 https://www.epa.gov/sdwa/chromium-drinking-water
