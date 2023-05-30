@@ -21,7 +21,7 @@ Milestone 4: Deploy with findings
 
 ---
 
-Data Source: https://data.ca.gov/dataset/water-quality-data
+Data Source: [data.ca.gov](https://data.ca.gov/dataset/water-quality-data)
 California Open Data Portal
 California Department of Water Resources
 Water Quality Data
@@ -186,8 +186,7 @@ The creation of the regulated_contaminants table in conjunction with the queries
 
 --- 
 # Milestone 3: Tableau
-https://public.tableau.com/views/IThinkImBeingPoisoned-AWaterQualityAnalysis/TitlePage?:language=en-US&:display_count=n&:origin=viz_share_link
-
+[I Think I'm Being Poisoned...](https://tinyurl.com/2mef2b97)
 Tableau was used to create a completely interactive multi-page site to showcase the contaminants that have exceeded the current state levels for safe water going back 75 years as well as only considering the past 5  years. It provides information by station and county. Each map and graph can be observed using 75 or 5 years of data. After the assembly of the EPA and the discovery of the dangers of different fertilizers and pesticides, the acceptible levels of these toxins were reduced, so while the data from the past 75 years show high averages, the past five years may yield an average of 0.0% in the drinking water. It is important to see the history of the contaminants in the water, because while it may no longer be present in drinking water, it may still have persistent contamination in the soil.
 
 Individual pages were created for the 8 most prevalent or dangerous contaminants in California: Antimony, Arsenic, Chromium, Lead, Mercury, Nitrate and Nitrite, and Strontium. Facts about these contaminants can be accessed on a page that shows their county-wide distribution and concentration, the history by county, and a bar graph showing the counties with a non-zero measure of that contaminant compared to the safe concentration set by the CA-EPA. On these pages, the user can also select the county on the map to see specific information on the timeline and bar graphs - the y-axis automatically adjusts to the highest level prior to selection, but upon selection it automatically adjusts to the maximum on that county. 
@@ -214,20 +213,11 @@ The title page utilizes and animation that walks through 75 years of contaminati
 The 8 contaminants that are either exceeding limits in California or are just known as particularly dangerous each have their own dashboard. These dashboards show a map broken up by county with the level of contaminant, and the color scheme going from gray - benign to red - toxic. Linked to the counties on the map are two graphs, one bar graph to show all of the counties' levels of that contaminant in relation to the state maximum level, and another that shows a timeline from the earliest measurements through 2022. For the first 2 visuals, there is a page selection that allows the user to look at the differences between the results of the past 75 years and the past 5 years alone. 
 
 The Tableau visualization was publised on Tabluea Public as 'I think I'm Being Poisoned', which can be found with the link:
-https://public.tableau.com/views/IThinkImBeingPoisoned-AWaterQualityAnalysis/TitlePage?:language=en-US&:display_count=n&:origin=viz_share_link
+[I Think I'm Being Poisoned...](https://tinyurl.com/2mef2b97)
 
 This completes the 3rd milestone. 
 
 ### Milestone 3: Complete
-
---- 
-# Milestone 4: Deploy
-
- Need to link directly to the repo and have a direct link from portfolio and github profile. Finally need to oragnize the data cleaning notes, programs, procedures and write up the full documentation. 
-
-
-
-
 
 --- 
 # References
