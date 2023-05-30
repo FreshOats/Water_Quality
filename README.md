@@ -231,8 +231,8 @@ This completes the 3rd milestone.
 
 --- 
 # References
-Data Source: https://data.ca.gov/dataset/water-quality-data
-Standards Source: https://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/documents/mclreview/mcls_dlrs_phgs.pdf
+Data Source: https://data.ca.gov/dataset/water-quality-data <br>
+Standards Source: https://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/documents/mclreview/mcls_dlrs_phgs.pdf <br>
 https://www.cdph.ca.gov/
 https://calepa.ca.gov/
 https://www.epa.gov/sdwa/chromium-drinking-water
