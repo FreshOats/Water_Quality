@@ -1,4 +1,5 @@
-# California Water Quality Analytics
+# I Think I've Been Poisoned...
+## An Investigation of Contaminants Present in California's Drinking Water
 
 If you're anything like I am, there is only 1 time of the year that is more exciting than any holiday: the release of the annual water quality report! This project looks into the past and present chemical contamination in the state of California to provide insights on how to better understand the safety of our most precious resource.  
 
